@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+//when user register
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -11,6 +12,8 @@ export const registerUser = async (req, res) => {
   res.status(201).json({ message: "User registered successfully" });
 };
 
+
+//when user login with registered credentials
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
