@@ -1,4 +1,5 @@
 import Cart from "../models/Cart.js";
+
 //when user adds item to cart
 export const addToCart = async (req, res) => {
   const { productId, quantity } = req.body;
@@ -10,6 +11,22 @@ export const addToCart = async (req, res) => {
   });
 
   res.status(201).json(cartItem);
+};
+
+//when user views items in cart
+export const getCart = async (req, res) => {
+  const cartItems = await Cart.find({ userId: req.user.id });
+
+  if (cartItems.length === 0) {
+    return res.status(200).json({
+      message: "Cart is empty",
+      items: []
+    });
+  }
+
+  res.status(200).json({
+    items: cartItems
+  });
 };
 
 //when user updates item quantity in cart

@@ -24,12 +24,12 @@ export const getProductById = async (req, res) => {
   }
 };
 
-//  CREATE product (for testing / admin use)
+//  INSERT products into database
 export const createProduct = async (req, res) => {
   try {
     const { name, price, description, stock } = req.body;
 
-    // basic validation
+    // validation
     if (!name || !price || !stock) {
       return res.status(400).json({ message: "All fields are required" });
     }
